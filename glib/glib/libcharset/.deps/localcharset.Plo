@@ -1,0 +1,112 @@
+localcharset.lo localcharset.o: localcharset.c ../../config.h \
+  localcharset.h /Users/egall/usr/include/stddef.h \
+  /Users/egall/usr/include/_types.h /Users/egall/usr/include/sys/_types.h \
+  /Users/egall/usr/include/sys/cdefs.h \
+  /Users/egall/usr/include/sys/_symbol_aliasing.h \
+  /Users/egall/usr/include/sys/_posix_availability.h \
+  /Users/egall/usr/include/machine/_types.h \
+  /Users/egall/usr/include/i386/_types.h /Users/egall/usr/include/stdio.h \
+  /Users/egall/usr/include/Availability.h \
+  /Users/egall/usr/include/AvailabilityInternal.h \
+  /Users/egall/usr/include/secure/_stdio.h \
+  /Users/egall/usr/include/secure/_common.h \
+  /Users/egall/usr/include/string.h /Users/egall/usr/include/strings.h \
+  /Users/egall/usr/include/secure/_string.h \
+  /Users/egall/usr/include/stdlib.h /Users/egall/usr/include/sys/wait.h \
+  /Users/egall/usr/include/sys/signal.h \
+  /Users/egall/usr/include/sys/appleapiopts.h \
+  /Users/egall/usr/include/machine/signal.h \
+  /Users/egall/usr/include/i386/signal.h \
+  /Users/egall/usr/include/i386/_structs.h \
+  /Users/egall/usr/include/sys/_structs.h \
+  /Users/egall/usr/include/machine/_structs.h \
+  /Users/egall/usr/include/mach/i386/_structs.h \
+  /Users/egall/usr/include/sys/resource.h \
+  /Users/egall/usr/include/machine/endian.h \
+  /Users/egall/usr/include/i386/endian.h \
+  /Users/egall/usr/include/sys/_endian.h \
+  /Users/egall/usr/include/libkern/_OSByteOrder.h \
+  /Users/egall/usr/include/libkern/i386/_OSByteOrder.h \
+  /Users/egall/usr/include/alloca.h \
+  /Users/egall/usr/include/machine/types.h \
+  /Users/egall/usr/include/i386/types.h \
+  /Users/egall/usr/include/i386/_types.h \
+  /Users/egall/usr/include/langinfo.h
+
+../../config.h:
+
+localcharset.h:
+
+/Users/egall/usr/include/stddef.h:
+
+/Users/egall/usr/include/_types.h:
+
+/Users/egall/usr/include/sys/_types.h:
+
+/Users/egall/usr/include/sys/cdefs.h:
+
+/Users/egall/usr/include/sys/_symbol_aliasing.h:
+
+/Users/egall/usr/include/sys/_posix_availability.h:
+
+/Users/egall/usr/include/machine/_types.h:
+
+/Users/egall/usr/include/i386/_types.h:
+
+/Users/egall/usr/include/stdio.h:
+
+/Users/egall/usr/include/Availability.h:
+
+/Users/egall/usr/include/AvailabilityInternal.h:
+
+/Users/egall/usr/include/secure/_stdio.h:
+
+/Users/egall/usr/include/secure/_common.h:
+
+/Users/egall/usr/include/string.h:
+
+/Users/egall/usr/include/strings.h:
+
+/Users/egall/usr/include/secure/_string.h:
+
+/Users/egall/usr/include/stdlib.h:
+
+/Users/egall/usr/include/sys/wait.h:
+
+/Users/egall/usr/include/sys/signal.h:
+
+/Users/egall/usr/include/sys/appleapiopts.h:
+
+/Users/egall/usr/include/machine/signal.h:
+
+/Users/egall/usr/include/i386/signal.h:
+
+/Users/egall/usr/include/i386/_structs.h:
+
+/Users/egall/usr/include/sys/_structs.h:
+
+/Users/egall/usr/include/machine/_structs.h:
+
+/Users/egall/usr/include/mach/i386/_structs.h:
+
+/Users/egall/usr/include/sys/resource.h:
+
+/Users/egall/usr/include/machine/endian.h:
+
+/Users/egall/usr/include/i386/endian.h:
+
+/Users/egall/usr/include/sys/_endian.h:
+
+/Users/egall/usr/include/libkern/_OSByteOrder.h:
+
+/Users/egall/usr/include/libkern/i386/_OSByteOrder.h:
+
+/Users/egall/usr/include/alloca.h:
+
+/Users/egall/usr/include/machine/types.h:
+
+/Users/egall/usr/include/i386/types.h:
+
+/Users/egall/usr/include/i386/_types.h:
+
+/Users/egall/usr/include/langinfo.h:
