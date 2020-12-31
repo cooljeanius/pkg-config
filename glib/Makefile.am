@@ -4,7 +4,7 @@ include $(top_srcdir)/Makefile.decl
 # http://people.gnome.org/~walters/docs/build-api.txt
 .buildapi-allow-builddir:
 
-ACLOCAL_AMFLAGS = -I m4macros ${ACLOCAL_FLAGS}
+ACLOCAL_AMFLAGS = -I m4macros ${ACLOCAL_FLAGS} --install
 
 SUBDIRS = . m4macros glib
 DIST_SUBDIRS = $(SUBDIRS)

@@ -17,3 +17,4 @@ ref-del.sed
 libtool
 config.h
 *stamp-*
+pkg-config
