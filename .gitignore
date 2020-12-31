@@ -18,3 +18,7 @@ libtool
 config.h
 *stamp-*
 pkg-config
+check/config.sh
+check/Makefile
+config.lt
+Makefile
