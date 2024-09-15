@@ -1611,7 +1611,7 @@ Optional Features:
   --disable-dependency-tracking
                           speeds up one-time build
   --enable-debug=[no/minimum/yes]
-                          turn on debugging [default=minimum]
+                          turn on debugging [default=glib_debug_default]
   --enable-gc-friendly    turn on garbage collector friendliness [default=no]
   --disable-mem-pools     disable all glib memory pools
   --disable-rebuilds      disable all source autogeneration rules
@@ -2113,6 +2113,50 @@ fi
   as_fn_set_status $ac_retval
 
 } # ac_fn_cxx_try_link
+
+# ac_fn_c_try_run LINENO
+# ----------------------
+# Try to run conftest.$ac_ext, and return whether this succeeded. Assumes that
+# executables *can* be run.
+ac_fn_c_try_run ()
+{
+  as_lineno=${as_lineno-"$1"} as_lineno_stack=as_lineno_stack=$as_lineno_stack
+  if { { ac_try="$ac_link"
+case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
+printf "%s\n" "$ac_try_echo"; } >&5
+  (eval "$ac_link") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; } && { ac_try='./conftest$ac_exeext'
+  { { case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
+printf "%s\n" "$ac_try_echo"; } >&5
+  (eval "$ac_try") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; }
+then :
+  ac_retval=0
+else case e in #(
+  e) printf "%s\n" "$as_me: program exited with status $ac_status" >&5
+       printf "%s\n" "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+       ac_retval=$ac_status ;;
+esac
+fi
+  rm -rf conftest.dSYM conftest_ipa8_conftest.oo
+  eval $as_lineno_stack; ${as_lineno_stack:+:} unset as_lineno
+  as_fn_set_status $ac_retval
+
+} # ac_fn_c_try_run
 
 # ac_fn_c_check_type LINENO TYPE VAR INCLUDES
 # -------------------------------------------
@@ -6664,7 +6708,7 @@ case "$host" in
     glib_cv_stack_grows=no
     # Unfortunately the mingw implementations of C99-style snprintf and vsnprintf
     # don't seem to be quite good enough, at least not in mingw-runtime-3.14.
-    # (Sorry, I don't know exactly what is the problem, but it is related to
+    # (Sorry, I dunno exactly what is the problem, but it is related to
     # floating point formatting and decimal point vs. comma.)
     # The simple tests in AC_FUNC_VSNPRINTF_C99 and AC_FUNC_SNPRINTF_C99 aren't
     # rigorous enough to notice, though.
@@ -22285,11 +22329,14 @@ else
 fi
 
 
-if test $cross_compiling != yes ; then
+if test "x${cross_compiling}" != "xyes"
+then :
+
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for extra flags to get ANSI library prototypes" >&5
 printf %s "checking for extra flags to get ANSI library prototypes... " >&6; }
-    glib_save_LIBS=$LIBS
-    LIBS="$LIBS -lm"
+    glib_save_LIBS="${LIBS}"
+    LIBS="${LIBS} -lm"
+    ## ...
     if test "$cross_compiling" = yes
 then :
   { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: error: in '$ac_pwd':" >&5
@@ -22300,70 +22347,26 @@ else case e in #(
   e) cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <math.h>
-		 int main (void) { return (log(1) != log(1.)); }
+int main(void) { return (log(1) != log(1.)); }
 _ACEOF
 if ac_fn_c_try_run "$LINENO"
 then :
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: none needed" >&5
 printf "%s\n" "none needed" >&6; }
 else case e in #(
-  e) glib_save_CFLAGS=$CFLAGS
-	 CFLAGS="$CFLAGS -std1"
-	 if test "$cross_compiling" = yes
+  e) glib_save_CFLAGS="${CFLAGS}"
+	  CFLAGS="${CFLAGS} -std1"
+	  if test "$cross_compiling" = yes
 then :
   { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: error: in '$ac_pwd':" >&5
 printf "%s\n" "$as_me: error: in '$ac_pwd':" >&2;}
 as_fn_error $? "cannot run test program while cross compiling
 See 'config.log' for more details" "$LINENO" 5; }
 else case e in #(
-  e)
-# ac_fn_c_try_run LINENO
-# ----------------------
-# Try to run conftest.$ac_ext, and return whether this succeeded. Assumes that
-# executables *can* be run.
-ac_fn_c_try_run ()
-{
-  as_lineno=${as_lineno-"$1"} as_lineno_stack=as_lineno_stack=$as_lineno_stack
-  if { { ac_try="$ac_link"
-case "(($ac_try" in
-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-  *) ac_try_echo=$ac_try;;
-esac
-eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
-printf "%s\n" "$ac_try_echo"; } >&5
-  (eval "$ac_link") 2>&5
-  ac_status=$?
-  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; } && { ac_try='./conftest$ac_exeext'
-  { { case "(($ac_try" in
-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-  *) ac_try_echo=$ac_try;;
-esac
-eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
-printf "%s\n" "$ac_try_echo"; } >&5
-  (eval "$ac_try") 2>&5
-  ac_status=$?
-  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; }
-then :
-  ac_retval=0
-else case e in #(
-  e) printf "%s\n" "$as_me: program exited with status $ac_status" >&5
-       printf "%s\n" "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-       ac_retval=$ac_status ;;
-esac
-fi
-  rm -rf conftest.dSYM conftest_ipa8_conftest.oo
-  eval $as_lineno_stack; ${as_lineno_stack:+:} unset as_lineno
-  as_fn_set_status $ac_retval
-
-} # ac_fn_c_try_run
-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+  e) cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <math.h>
-		     int main (void) { return (log(1) != log(1.)); }
+		      int main(void) { return (log(1) != log(1.)); }
 _ACEOF
 if ac_fn_c_try_run "$LINENO"
 then :
@@ -22372,10 +22375,10 @@ printf "%s\n" "-std1" >&6; }
 else case e in #(
   e) { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: " >&5
 printf "%s\n" "" >&6; }
-	     CFLAGS=$glib_save_CFLAGS
-	     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: No ANSI prototypes found in library. (-std1 didn't work.)" >&5
-printf "%s\n" "$as_me: WARNING: No ANSI prototypes found in library. (-std1 didn't work.)" >&2;}
-	  ;;
+	      CFLAGS="${glib_save_CFLAGS}"
+	      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: No ANSI prototypes found in library. (-std1 failed.)" >&5
+printf "%s\n" "$as_me: WARNING: No ANSI prototypes found in library. (-std1 failed.)" >&2;}
+           ;;
 esac
 fi
 rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
@@ -22391,9 +22394,9 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
 esac
 fi
 
-    LIBS=$glib_save_LIBS
-fi
+    LIBS="${glib_save_LIBS}"
 
+fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for extra flags for POSIX compliance" >&5
 printf %s "checking for extra flags for POSIX compliance... " >&6; }
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
@@ -22412,9 +22415,10 @@ then :
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: none needed" >&5
 printf "%s\n" "none needed" >&6; }
 else case e in #(
-  e) glib_save_CFLAGS=$CFLAGS
-  CFLAGS="$CFLAGS -posix"
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+  e) glib_save_CFLAGS="${CFLAGS}"
+   CFLAGS="${CFLAGS} -posix"
+   ## ...
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <dirent.h>
 int
@@ -22432,16 +22436,16 @@ printf "%s\n" "-posix" >&6; }
 else case e in #(
   e) { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: " >&5
 printf "%s\n" "" >&6; }
-    CFLAGS=$glib_save_CFLAGS
-    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not determine POSIX flag. (-posix didn't work.)" >&5
-printf "%s\n" "$as_me: WARNING: Could not determine POSIX flag. (-posix didn't work.)" >&2;} ;;
-esac
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext ;;
+      CFLAGS="${glib_save_CFLAGS}"
+      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not determine POSIX flag. (-posix failed.)" >&5
+printf "%s\n" "$as_me: WARNING: Could not determine POSIX flag. (-posix failed.)" >&2;} ;;
 esac
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
-
+ ;;
+esac
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
 # Checks for library functions.
 ac_func=
 for ac_item in $ac_func_c_list
@@ -23005,7 +23009,7 @@ else case e in #(
   e) cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <stdio.h>
-			int main()
+			int main(void)
 			{
 			  long long b, a = -0x3AFAFAFAFAFAFAFALL;
 			  char buffer[1000];
@@ -23175,6 +23179,7 @@ _ACEOF
 if ac_fn_c_try_compile "$LINENO"
 then :
 
+
 printf "%s\n" "#define SANE_MALLOC_PROTOS 1" >>confdefs.h
 
     SANE_MALLOC_PROTOS=yes
@@ -23204,7 +23209,7 @@ else case e in #(
 
 	volatile int *a = 0, *b = 0;
 	void foo (void);
-	int main () { volatile int y = 7; a = &y; foo (); return b > a; }
+	int main(void) { volatile int y = 7; a = &y; foo (); return b > a; }
 	void foo (void) { volatile int x = 5; b = &x; }
 
 _ACEOF
@@ -23239,7 +23244,7 @@ else case e in #(
 /* end confdefs.h.  */
 
 	__inline int foo () { return 0; }
-	int main () { return foo (); }
+	int main(void) { return foo (); }
 
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"
@@ -23273,7 +23278,7 @@ else case e in #(
 /* end confdefs.h.  */
 
 	__inline__ int foo () { return 0; }
-	int main () { return foo (); }
+	int main(void) { return foo (); }
 
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"
@@ -23308,7 +23313,7 @@ else case e in #(
 
 	#undef inline
 	inline int foo () { return 0; }
-	int main () { return foo (); }
+	int main(void) { return foo (); }
 
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"
@@ -23527,22 +23532,26 @@ __attribute__ ((visibility ("hidden")))
      f_hidden (void)
 {
 }
+
 void
 __attribute__ ((visibility ("internal")))
      f_internal (void)
 {
 }
+
 void
 __attribute__ ((visibility ("protected")))
      f_protected (void)
 {
 }
+
 void
 __attribute__ ((visibility ("default")))
      f_default (void)
 {
 }
-int main (int argc, char **argv)
+
+int main(int argc, char **argv)
 {
 	f_hidden();
 	f_internal();
@@ -23597,6 +23606,7 @@ printf %s "checking whether using Sun Studio C compiler... " >&6; }
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #if defined(__SUNPRO_C) || (__SUNPRO_C >= 0x550)
+/* (OK) */
 #else
 # include "error: this is not Sun Studio."
 #endif
@@ -23611,9 +23621,9 @@ main (void)
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"
 then :
-   g_have_sunstudio_visibility=yes
+  g_have_sunstudio_visibility=yes
 else case e in #(
-  e)  g_have_sunstudio_visibility=no  ;;
+  e) g_have_sunstudio_visibility=no ;;
 esac
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
@@ -23869,7 +23879,10 @@ printf "%s\n" "#define AC_APPLE_UNIVERSAL_BUILD 1" >>confdefs.h
  presetting ac_cv_c_bigendian=no (or yes) will help" "$LINENO" 5 ;;
  esac
 
-if test x$ac_cv_c_bigendian = xuniversal ; then
+  ## a bit of extra effort:
+if test "x${ac_cv_c_bigendian}" = "xuniversal"
+then :
+
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <endian.h>
@@ -23877,9 +23890,10 @@ int
 main (void)
 {
 #if __BYTE_ORDER == __BIG_ENDIAN
+/* (OK) */
 #else
-#error Not a big endian.
-#endif
+# error "Not a big endian."
+#endif /* __BYTE_ORDER == __BIG_ENDIAN */
   ;
   return 0;
 }
@@ -23887,7 +23901,6 @@ _ACEOF
 if ac_fn_c_try_compile "$LINENO"
 then :
   ac_cv_c_bigendian=yes
-
 else case e in #(
   e) cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
@@ -23896,9 +23909,10 @@ int
 main (void)
 {
 #if __BYTE_ORDER == __LITTLE_ENDIAN
+/* (OK) */
 #else
-#error Not a little endian.
-#endif
+# error "Not a little endian."
+#endif /* __BYTE_ORDER == __LITTLE_ENDIAN */
   ;
   return 0;
 }
@@ -23906,7 +23920,6 @@ _ACEOF
 if ac_fn_c_try_compile "$LINENO"
 then :
   ac_cv_c_bigendian=no
-
 else case e in #(
   e) { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not determine endianness." >&5
 printf "%s\n" "$as_me: WARNING: Could not determine endianness." >&2;} ;;
@@ -23916,8 +23929,8 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext ;;
 esac
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
-fi
 
+fi
 
 # check for header files
 ac_fn_c_check_header_compile "$LINENO" "dirent.h" "ac_cv_header_dirent_h" "$ac_includes_default"
@@ -24940,7 +24953,7 @@ if test $ac_cv_sizeof_size_t = $ac_cv_sizeof_int &&
 #pragma options langlvl=stdc89
 #endif
 #include <stddef.h>
-int main ()
+int main(void)
 {
   size_t s = 1;
   unsigned int *size_int = &s;
@@ -24979,7 +24992,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #pragma options langlvl=stdc89
 #endif
 #include <stddef.h>
-int main ()
+int main(void)
 {
    size_t s = 1;
    unsigned long *size_long = &s;
@@ -29001,7 +29014,7 @@ printf "%s\n" "in -lresolv" >&6; }
                               NETWORK_LIBS="-lresolv $NETWORK_LIBS"
 else case e in #(
   e) LIBS="-lbind $save_libs"
-                            cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+                              cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <resolv.h>
 int
@@ -29681,7 +29694,7 @@ else case e in #(
   e) cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
-      int main() {
+      int main(void) {
         char buf[128], abc[128], *b;
         int len, off, align;
         bcopy("abcdefghijklmnopqrstuvwxyz0123456789", abc, 36);
@@ -29785,15 +29798,14 @@ if test ${glib_cv_sane_realloc+y}
 then :
   printf %s "(cached) " >&6
 else case e in #(
-  e)
-        if test "$cross_compiling" = yes
+  e) if test "$cross_compiling" = yes
 then :
   glib_cv_sane_realloc=yes
 else case e in #(
   e) cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <stdlib.h>
-        int main() {
+        int main(void) {
           return realloc (0, sizeof (int)) == 0;
         }
 _ACEOF
@@ -29826,8 +29838,7 @@ if test ${glib_cv_langinfo_codeset+y}
 then :
   printf %s "(cached) " >&6
 else case e in #(
-  e)
-        cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+  e) cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <langinfo.h>
 int
@@ -29973,7 +29984,7 @@ else case e in #(
                     else
                       free (mem);
 		}
-		int main() {
+		int main(void) {
 		    test_memalign (  128,   128 - 2 * sizeof (void*));
 		    test_memalign (  256,   256 - 2 * sizeof (void*));
 		    test_memalign (  512,   512 - 2 * sizeof (void*));
@@ -30030,7 +30041,7 @@ else case e in #(
 /* end confdefs.h.  */
 #include <stdlib.h>
 #include <string.h>
-int main() {
+int main(void) {
   char p[10];
   (void) strlcpy (p, "hi", 10);
   if (strlcat (p, "bye", 0) != 3)
@@ -30080,7 +30091,7 @@ else case e in #(
 	  exit (1);
 	va_end (args1); va_end (args2);
 	}
-	int main() {
+	int main(void) {
 	  f (0, 42);
 	  return 0;
 	}
@@ -30118,7 +30129,7 @@ else case e in #(
 	  exit (1);
 	va_end (args1); va_end (args2);
 	}
-	int main() {
+	int main(void) {
 	  f (0, 42);
 	  return 0;
 	}
@@ -30174,7 +30185,7 @@ else case e in #(
 	  exit (1);
 	va_end (args1); va_end (args2);
 	}
-	int main() {
+	int main(void) {
 	  f (0, 42);
 	  return 0;
 	}
@@ -30468,8 +30479,7 @@ if test ${glib_cv_rtldglobal_broken+y}
 then :
   printf %s "(cached) " >&6
 else case e in #(
-  e)
-		if test "$cross_compiling" = yes
+  e) if test "$cross_compiling" = yes
 then :
   glib_cv_rtldglobal_broken=no
 else case e in #(
@@ -30484,7 +30494,7 @@ else case e in #(
 #  define RTLD_LAZY 0
 #endif
 int glib_plugin_test;
-int main () {
+int main(void) {
     void *handle, *global, *local;
     global = &glib_plugin_test;
     handle = dlopen ("./$objdir/plugin.o", RTLD_GLOBAL | RTLD_LAZY);
@@ -30535,7 +30545,7 @@ else case e in #(
 /* end confdefs.h.  */
 #include <dlfcn.h>
                 int glib_underscore_test (void) { return 42; }
-		int main() {
+		int main(void) {
 		  void *f1 = (void*)0, *f2 = (void*)0, *handle;
 		  handle = dlopen ((void*)0, 0);
 		  if (handle) {
@@ -30822,7 +30832,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #ifndef PORT_SOURCE_FILE
 #error "Please upgrade to Nevada 72 or above to suppoert FEN"
 #endif
-int main() { return 0; }
+int main(void) { return 0; }
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"
 then :
@@ -31034,7 +31044,7 @@ case "$host" in
     PLATFORMDEP=gwin32.lo
     ;;
   *)
-    PLATFORMDEP=
+    PLATFORMDEP=""
     ;;
 esac
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $PLATFORMDEP" >&5
@@ -31060,7 +31070,6 @@ else
   ENABLE_TIMELOOP_TRUE='#'
   ENABLE_TIMELOOP_FALSE=
 fi
-
 
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking if building for some Win32 platform" >&5
 printf %s "checking if building for some Win32 platform... " >&6; }
@@ -31098,12 +31107,12 @@ fi
 
 THREAD_NO_IMPLEMENTATION="No thread implementation found."
 
-FLAG_DOES_NOT_WORK="I can't find the MACRO to enable thread safety on your
-                platform (normally it's "_REENTRANT"). I'll not use any flag on
+FLAG_DOES_NOT_WORK="I cannot find the MACRO to enable thread safety on your
+                platform (normally it is "_REENTRANT"). I will not use any flag on
                 compilation now, but then your programs might not work.
                 Please provide information on how it is done on your system."
 
-LIBS_NOT_FOUND_1="I can't find the libraries for the thread implementation
+LIBS_NOT_FOUND_1="I cannot find the libraries for the thread implementation
                  "
 
 LIBS_NOT_FOUND_2=". Please choose another thread implementation or
@@ -31128,13 +31137,17 @@ AIX_COMPILE_INFO="AIX's C compiler needs to be called by a different name, when
 printf %s "checking for thread implementation... " >&6; }
 
 have_threads=no
-if test "x$with_threads" = xyes || test "x$with_threads" = xposix; then
+if test "x${with_threads}" = "xyes" || test "x${with_threads}" = "xposix"
+then :
+
 	# -D_POSIX4_DRAFT_SOURCE -D_POSIX4A_DRAFT10_SOURCE is for DG/UX
 	# -U_OSF_SOURCE is for Digital UNIX 4.0d
 	GTHREAD_COMPILE_IMPL_DEFINES="-D_POSIX4_DRAFT_SOURCE -D_POSIX4A_DRAFT10_SOURCE -U_OSF_SOURCE"
-	glib_save_CPPFLAGS="$CPPFLAGS"
-	CPPFLAGS="$CPPFLAGS $GTHREAD_COMPILE_IMPL_DEFINES"
-        if test "x$have_threads" = xno; then
+	glib_save_CPPFLAGS="${CPPFLAGS}"
+	CPPFLAGS="${CPPFLAGS} ${GTHREAD_COMPILE_IMPL_DEFINES}"
+	if test "x${have_threads}" = "xno"
+then :
+
                 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <pthread.h>
@@ -31151,10 +31164,13 @@ then :
   have_threads=posix
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
-        fi
+
+fi
 	# Tru64Unix requires -pthread to find pthread.h. See #103020
-	CPPFLAGS="$CPPFLAGS -pthread"
-	if test "x$have_threads" = xno; then
+	CPPFLAGS="${CPPFLAGS} -pthread"
+	if test "x${have_threads}" = "xno"
+then :
+
 	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <pthread.h>
@@ -31171,35 +31187,45 @@ then :
   have_threads=posix
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
-        fi
-	CPPFLAGS="$glib_save_CPPFLAGS"
+
 fi
-if test "x$with_threads" = xyes || test "x$with_threads" = xwin32; then
-        case $host in
+	CPPFLAGS="${glib_save_CPPFLAGS}"
+
+fi
+if test "x${with_threads}" = "xyes" || test "x${with_threads}" = "xwin32"
+then :
+
+        case ${host} in
                 *-*-mingw*)
                 have_threads=win32
                 ;;
         esac
+
 fi
 
-if test "x$have_threads" = xno; then
+if test "x${have_threads}" = "xno"
+then :
+
         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: none available" >&5
 printf "%s\n" "none available" >&6; }
-        as_fn_error $? "$THREAD_NO_IMPLEMENTATION" "$LINENO" 5
-else
-        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $have_threads" >&5
-printf "%s\n" "$have_threads" >&6; }
+        as_fn_error $? "${THREAD_NO_IMPLEMENTATION}" "$LINENO" 5
+
+else case e in #(
+  e)
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: ${have_threads}" >&5
+printf "%s\n" "${have_threads}" >&6; }
+ ;;
+esac
 fi
 
 
-
-G_THREAD_LIBS=
-G_THREAD_LIBS_EXTRA=
-G_THREAD_CFLAGS=
-
+G_THREAD_LIBS=""
+G_THREAD_LIBS_EXTRA=""
+G_THREAD_CFLAGS=""
 
 
-if test x"$have_threads" = xposix; then
+
+if test x"${have_threads}" = x"posix"; then
   # First we test for posix, whether -pthread or -pthreads do the trick as
   # both CPPFLAG and LIBS.
   # One of them does for most gcc versions and some other platforms/compilers
@@ -31217,8 +31243,8 @@ if test x"$have_threads" = xposix; then
       ;;
     *)
       for flag in pthread pthreads mt; do
-        glib_save_CFLAGS="$CFLAGS"
-        CFLAGS="$CFLAGS -$flag"
+        glib_save_CFLAGS="${CFLAGS}"
+        CFLAGS="${CFLAGS} -${flag}"
         if test "$cross_compiling" = yes
 then :
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
@@ -31227,7 +31253,7 @@ then :
 #include <pthread.h>
 int check_me = 0;
 void* func(void* data) {check_me = 42; return &check_me;}
-int main()
+int main(void)
  { pthread_t t;
    void *ret;
    pthread_create (&t, 0, func, 0);
@@ -31247,11 +31273,10 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam \
 else case e in #(
   e) cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
-
 #include <pthread.h>
 int check_me = 0;
 void* func(void* data) {check_me = 42; return &check_me;}
-int main()
+int main(void)
  { pthread_t t;
    void *ret;
    pthread_create (&t, 0, func, 0);
@@ -31271,18 +31296,18 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
 esac
 fi
 
-        CFLAGS="$glib_save_CFLAGS"
-        if test $glib_flag_works = yes ; then
-           G_THREAD_CFLAGS=-$flag
-        G_THREAD_LIBS=-$flag
-        break;
+        CFLAGS="${glib_save_CFLAGS}"
+        if test "x${glib_flag_works}" = "xyes"; then
+           G_THREAD_CFLAGS=-${flag}
+           G_THREAD_LIBS=-${flag}
+           break;
         fi
       done
-       ;;
+      ;;
   esac
 fi
 
-if test x"$G_THREAD_CFLAGS" = x; then
+if test x"${G_THREAD_CFLAGS}" = x""; then
 
   # The canonical -pthread[s] does not work. Try something different.
 
@@ -31413,7 +31438,7 @@ then :
 #include <pthread.h>
 int check_me = 0;
 void* func(void* data) {check_me = 42; return &check_me;}
-int main()
+int main(void)
  { pthread_t t;
    void *ret;
    pthread_create (&t, $defattr, func, 0);
@@ -31433,11 +31458,10 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam \
 else case e in #(
   e) cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
-
 #include <pthread.h>
 int check_me = 0;
 void* func(void* data) {check_me = 42; return &check_me;}
-int main()
+int main(void)
  { pthread_t t;
    void *ret;
    pthread_create (&t, $defattr, func, 0);
@@ -31541,7 +31565,7 @@ else case e in #(
 
 #include <errno.h>
 #include <pwd.h>
-int main () {
+int main(void) {
     char buffer[10000];
     struct passwd pwd, *pwptr = &pwd;
     int error;
@@ -31640,7 +31664,7 @@ else case e in #(
 
 #include <errno.h>
 #include <grp.h>
-int main () {
+int main(void) {
     char buffer[10000];
     struct group grp, *grpptr = &grp;
     int error;
@@ -32670,7 +32694,7 @@ printf %s "checking for -Bsymbolic-functions linker flag... " >&6; }
 int
 main (void)
 {
-int main (void) { return 0; }
+int main(void) { return 0; }
   ;
   return 0;
 }
@@ -32678,12 +32702,10 @@ _ACEOF
 if ac_fn_c_try_link "$LINENO"
 then :
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-printf "%s\n" "yes" >&6; }
-                           enable_Bsymbolic=yes
+printf "%s\n" "yes" >&6; }; enable_Bsymbolic=yes
 else case e in #(
   e) { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
-printf "%s\n" "no" >&6; }
-                           enable_Bsymbolic=no ;;
+printf "%s\n" "no" >&6; }; enable_Bsymbolic=no ;;
 esac
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam \
