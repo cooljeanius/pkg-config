@@ -31,12 +31,16 @@ CONFIGURE_DEPENDENCIES = acglib.m4
 # build documentation when doing distcheck
 DISTCHECK_CONFIGURE_FLAGS = --enable-debug --enable-gtk-doc --enable-man --disable-maintainer-mode
 
-DISTCLEANFILES = config.lt
+DISTCLEANFILES = config.lt autoscan.log *~
 
 distclean-local: lcov-clean
-	if test $(srcdir) = .; then :; else \
+	if test $(srcdir) = .; then \
+	    echo "$@: nothing to in `pwd`"; \
+	else \
 	    rm -f $(BUILT_EXTRA_DIST); \
 	fi
+	rm -rf autom4te.cache || rmdir autom4te.cache || find . -name autom4te.cache -delete
+	find . -name .deps -delete || rm -rf */.deps || rmdir */.deps
 
 .PHONY: files release sanity snapshot
 

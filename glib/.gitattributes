@@ -1,9 +1,22 @@
+aclocal.m4 linguist-generated
 build-aux/compile linguist-vendored
 build-aux/config.guess linguist-vendored
+build-aux/config.rpath linguist-vendored
 build-aux/config.sub linguist-vendored
 build-aux/depcomp linguist-vendored
 build-aux/install-sh linguist-vendored
 build-aux/ltmain.sh linguist-vendored
 build-aux/missing linguist-vendored
 build-aux/mkinstalldirs linguist-vendored
+config.h.in linguist-generated
+configure linguist-generated
+configure.scan linguist-generated
+glib/gnulib/Makefile.in linguist-generated
+glib/Makefile.in linguist-generated
+m4macros/intlmacosx.m4 linguist-vendored
+m4macros/libtool.m4 linguist-vendored
+m4macros/lt*.m4 linguist-vendored
+m4macros/Makefile.in linguist-generated
+
+# gnulib ChangeLog driver:
 ChangeLog    merge=cl-merge

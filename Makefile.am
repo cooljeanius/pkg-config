@@ -56,6 +56,7 @@ gcov:
 	-$(MAKE) $(AM_MAKEFLAGS) -k check
 	$(GCOV) $(pkg_config_SOURCES)
 CLEANFILES = *.gcda *.gcno *.gcov
+DISTCLEANFILES = *~ autoscan.log
 
 # Since we can't always have glib in DIST_SUBDIRS, we need to make sure
 # glib is configured when we want to run dist. Unfortunately, there's no
@@ -66,3 +67,6 @@ dist-hook:
 	@echo "error: --with-internal-glib is required to include glib in dist"
 	@exit 1
 endif
+
+distclean-local:
+	rm -rf autom4te.cache || rmdir autom4te.cache || find . -name autom4te.cache -delete

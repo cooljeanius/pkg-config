@@ -15,6 +15,7 @@ ref-del.sed
 *.cache
 *.status
 libtool
+confdefs.h
 config.h
 *stamp-*
 pkg-config
